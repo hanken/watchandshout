@@ -36,8 +36,8 @@ import java.util.Properties;
  */
 public class MainWindow extends javax.swing.JFrame {
     private DirectoryMonitor dirMon;
-    private Boolean running = false;
-    private  String version;
+    private Boolean running;
+    private String version;
     private WavPlayer player;
     private Properties config;
     private String configFile;
@@ -46,12 +46,17 @@ public class MainWindow extends javax.swing.JFrame {
     public MainWindow() {
        
         initComponents();
+        /* Set some default values */
         Image img = Toolkit.getDefaultToolkit().getImage("Gnome-modem.png");
         this.setIconImage(img);
+        this.running=false;
         setStatus ("Stoped");
-         loadConfig("./WatchAndShout.config");
+
+        // Try to load the default config file
+        loadConfig("./WatchAndShout.config");
     }
 
+    /* for passing the version nr. to the aboutwindow */
     public void setVersionNumber(String ver){
         this.version = ver;
     }
@@ -135,7 +140,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         jToggleSound.setIcon(new javax.swing.ImageIcon(getClass().getResource("/watchandshout/soundoff.png"))); // NOI18N
         jToggleSound.setSelected(true);
-        jToggleSound.setToolTipText("Run");
+        jToggleSound.setToolTipText("");
         jToggleSound.setFocusable(false);
         jToggleSound.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jToggleSound.setIconTextGap(2);
@@ -274,7 +279,7 @@ public class MainWindow extends javax.swing.JFrame {
                     .addComponent(jTextAlarmAudio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBrowseAlarmAudio)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jToolBar2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -334,6 +339,7 @@ public class MainWindow extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -342,7 +348,6 @@ public class MainWindow extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(listMsg, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -350,9 +355,9 @@ public class MainWindow extends javax.swing.JFrame {
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(listMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -376,22 +381,24 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+            // Show the about dialog
             AboutDialog ad = new AboutDialog(this,true);
             ad.setVersion(version);
             ad.setIconImage(this.getIconImage());
             ad.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
+    //Browse Directories
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
        FileChooser dc = new FileChooser(this,true);
        dc.setTitle("Choose a directory to monitor");
-
        dc.setVisible(true);
        this.jTextField1.setText(dc.getDir());
     }//GEN-LAST:event_jButton2ActionPerformed
 
+
     private void jSlider1MouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSlider1MouseReleased
-        
+    
     }//GEN-LAST:event_jSlider1MouseReleased
 
     private void jSlider1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jSlider1MouseMoved
@@ -402,6 +409,7 @@ public class MainWindow extends javax.swing.JFrame {
        lblInterval.setText( String.valueOf(jSlider1.getValue()) + " min");
     }//GEN-LAST:event_jSlider1MouseDragged
 
+    //Stop sound if playing
     private void jToggleSoundActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleSoundActionPerformed
         if(player != null){
                 player.stop();
@@ -428,6 +436,8 @@ public class MainWindow extends javax.swing.JFrame {
                 save();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+
+
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
       FileChooser dc = new FileChooser(this,true,"file","none");
        dc.setTitle("Choose a Config File");
@@ -436,11 +446,11 @@ public class MainWindow extends javax.swing.JFrame {
        loadConfig(dc.getDir());
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    /*load a config file */
     private void loadConfig(String file) {
         File f = new File (file);
+
         if (f.exists() && !(f.isDirectory())){
-
-
             config = new Properties();
 
                 try {
@@ -457,19 +467,23 @@ public class MainWindow extends javax.swing.JFrame {
                     }
                     setStatus("Settings loaded");
 
+                    //Catch FNF and IO Exceptions and send msg
                  } catch (FileNotFoundException ex) {
                     setMsg("Could not open Config file:" + file);
                  } catch (IOException ex) {
-                       setMsg("Error opening Config file:" + file);
-
+                     setMsg("Error opening Config file:" + file);
                 }
         }else{
             setMsg("Could not open Config file:" + file);
         }
     }
 
+    //SAves Configuration
     private void save(){
+        // New config
         config = new Properties();
+
+        // Set values
         config.setProperty ("timeout", String.valueOf(jSlider1.getValue()) );
         config.setProperty("directory", jTextField1.getText());
         if (jCheckBox1.isSelected()){
@@ -479,21 +493,28 @@ public class MainWindow extends javax.swing.JFrame {
         }
         config.setProperty("testaudio", jTextTestAudio.getText());
         config.setProperty("alarmaudio", jTextAlarmAudio.getText());
+        
+        // open file chooser
         FileChooser dc = new FileChooser(this,true,"savefile");
-       dc.setTitle("Choose a File");
-
+        dc.setTitle("Choose a File");
         dc.setVisible(true);
         configFile=dc.getDir();
+
+        //write to file
         try {
             config.store(new FileOutputStream(configFile), "WatchAndShout Config File");
         } catch (IOException ex) {
            setMsg("Could not save config file");
         }
     }
+
+    // close the application
     private void close(){
+        //stop sound if running
         if (player != null){
             player.stop();
         }
+        //Stop monitor if running
         if (dirMon != null){
             dirMon.stop();
         }
@@ -502,15 +523,20 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
    
-
+    // writes a status message
     public void setStatus(String status){
         jlblStatus.setText(status);
     }
 
+    //write to msglist
     public void setMsg(String msg){
+        if (listMsg.getItemCount() > 150){
+                listMsg.removeAll();
+        }
         listMsg.add(msg,0);
     }
 
+       // plays test file if sound is on
     public void playTest(){
         if (jToggleSound.isSelected()){
             setMsg("Playing testfile");
@@ -524,6 +550,8 @@ public class MainWindow extends javax.swing.JFrame {
             }
         }
     }
+
+    /* Prints alarm msg and plays sound */
     public void setAlarm(){
         if (player != null){
             player.stop();
@@ -535,24 +563,32 @@ public class MainWindow extends javax.swing.JFrame {
                 new Thread(player).start();
          }
     }
-  
+
+    /* Start/stop the monitor */
     private void run(){
       try {
         if (!running){
+                //start
                 setMsg("Started");
                 disableGui();
                 dirMon = new DirectoryMonitor(this, jTextField1.getText(), jSlider1.getValue()*60, jCheckBox1.isSelected());
-                playTest();                
+                // Play test audio file
+                playTest();
         }else{
+            //Stop Monitor and audio player
             if (dirMon != null){
                dirMon.stop();
             }
             if(player != null){
                 player.stop();
             }
+            //Re-enable the gui elements
             enableGui();
         }
+        //Togle running variable
         running = ! running;
+
+      // Catch Exeption throen by dirMon
       }catch(IllegalArgumentException ex){
         listMsg.add(ex.getMessage(),0);
         running = false;
@@ -561,6 +597,8 @@ public class MainWindow extends javax.swing.JFrame {
         enableGui();
       }
     }
+
+
     private void disableGui(){
         toggleGui(false);
     }
@@ -569,6 +607,7 @@ public class MainWindow extends javax.swing.JFrame {
         toggleGui(true);
     }
 
+       //Enables/disable the gui elements
     private void toggleGui(boolean enabled){
           this.jTextAlarmAudio.setEnabled(enabled);
         this.jTextTestAudio.setEnabled(enabled);
