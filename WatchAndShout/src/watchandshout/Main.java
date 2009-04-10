@@ -23,7 +23,7 @@ package watchandshout;
  * @author franco
  */
 public class Main {
-    private static final String version = "0.1alpha";
+    private static final String version = "0.1";
     private MainWindow mw;
     /**
      * @param args the command line arguments
@@ -33,6 +33,7 @@ public class Main {
     }
 
     public Main(){
+        /* Start the MainWindow */
         mw = new MainWindow();
         mw.setVersionNumber(version);
         mw.setVisible(true);
