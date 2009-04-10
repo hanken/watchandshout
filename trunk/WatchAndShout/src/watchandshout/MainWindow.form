@@ -83,7 +83,6 @@
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="WatchAndShout"/>
-    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="menuBar" type="java.lang.String" value="jMenuBar1"/>
@@ -107,16 +106,16 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jToolBar1" alignment="1" pref="543" max="32767" attributes="0"/>
-          <Component id="jToolBar2" alignment="0" pref="543" max="32767" attributes="0"/>
+          <Component id="jToolBar1" alignment="1" pref="563" max="32767" attributes="0"/>
+          <Component id="jToolBar2" alignment="0" pref="563" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="listMsg" pref="523" max="32767" attributes="0"/>
+              <Component id="listMsg" pref="543" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -242,18 +241,18 @@
                   <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jCheckBox1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jSlider1" alignment="1" pref="291" max="32767" attributes="0"/>
+                      <Component id="jSlider1" alignment="1" pref="311" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="jTextAlarmAudio" alignment="0" max="32767" attributes="1"/>
-                              <Component id="jTextTestAudio" alignment="0" max="32767" attributes="1"/>
-                              <Component id="jTextField1" alignment="0" pref="215" max="32767" attributes="1"/>
+                              <Component id="jTextAlarmAudio" alignment="0" min="-2" pref="215" max="-2" attributes="1"/>
+                              <Component id="jTextTestAudio" alignment="0" min="-2" pref="215" max="-2" attributes="1"/>
+                              <Component id="jTextField1" alignment="0" min="-2" pref="215" max="-2" attributes="1"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButtonBrowseAlarmAudio" pref="70" max="32767" attributes="0"/>
-                              <Component id="jButtonBrowseTestAudio" pref="70" max="32767" attributes="0"/>
-                              <Component id="jButton2" alignment="0" pref="70" max="32767" attributes="0"/>
+                              <Component id="jButtonBrowseAlarmAudio" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="jButtonBrowseTestAudio" min="-2" pref="90" max="-2" attributes="0"/>
+                              <Component id="jButton2" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -292,7 +291,7 @@
                       <Component id="jButtonBrowseAlarmAudio" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel5" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="22" max="32767" attributes="0"/>
+                  <EmptySpace pref="42" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -309,6 +308,9 @@
             <Property name="paintTicks" type="boolean" value="true"/>
             <Property name="toolTipText" type="java.lang.String" value="Interval in minutes"/>
             <Property name="value" type="int" value="10"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[100, 49]"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jSlider1MouseReleased"/>
